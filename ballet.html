@@ -6,155 +6,159 @@
     <title>Portfólio de Ballet - Paiva Studio Maker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        /* --- ESTILOS GERAIS --- */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
         body { font-family: 'Montserrat', sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 0; }
-        .wrapper { padding: 40px 20px; }
-        .section-title-major { text-align: center; font-size: 2.2em; font-weight: 700; margin: 20px 0 30px 0; color: #ffffff; }
-
-        /* --- MENU DE NAVEGAÇÃO --- */
-        .main-nav { background-color: #1E1E1E; padding: 15px 30px; text-align: center; border-bottom: 1px solid #333; }
-        .main-nav a { color: #fff; text-decoration: none; font-weight: 700; margin: 0 15px; transition: color 0.3s; }
-        .main-nav a:hover { color: #007BFF; }
-
-        /* --- ESTÚDIO MÓVEL --- */
-        .studio-info { max-width: 900px; margin: auto; text-align: center; }
-        .studio-info h2 { font-size: 2em; margin: 0 0 15px 0; }
-        .studio-info .intro-p { font-size: 1.1em; line-height: 1.7; color: #cccccc; margin-bottom: 40px; }
-        .advantages-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: left; }
-        .advantage-box { flex: 1; min-width: 300px; background-color: #1E1E1E; padding: 25px; border-radius: 8px; border-left: 4px solid #007BFF; }
+        .wrapper { padding: 60px 20px; }
+        .section-title-major { text-align: center; font-size: 2.2em; font-weight: 700; margin-bottom: 40px; }
+        .main-nav { background-color: #1E1E1E; padding: 15px 30px; text-align: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
+        .main-nav a { color: #fff; text-decoration: none; font-weight: 700; margin: 0 15px; }
+        .two-column-section { display: flex; align-items: center; gap: 40px; max-width: 1100px; margin: auto; }
+        .two-column-section .text-content, .two-column-section .image-content { flex: 1; }
+        .two-column-section .image-content img { width: 100%; border-radius: 10px; }
+        .two-column-section h2 { font-size: 2em; margin-bottom: 15px; }
+        .two-column-section p { font-size: 1.1em; line-height: 1.7; color: #cccccc; }
+        .two-column-section.reverse { flex-direction: row-reverse; }
+        .advantage-box { margin-top: 20px; background-color: #1E1E1E; padding: 20px; border-radius: 8px; border-left: 4px solid #007BFF; text-align: left; }
         .advantage-box h4 { font-size: 1.2em; margin: 0 0 10px 0; }
-        .advantage-box p { font-size: 0.95em; line-height: 1.6; color: #cccccc; margin: 0; }
-
-        /* --- CARROSSEL --- */
-        .carousel-container { max-width: 400px; width: 80%; margin: auto; position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .multi-carousel-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .carousel-container { max-width: 300px; width: 100%; position: relative; overflow: hidden; border-radius: 15px; }
         .carousel-track { display: flex; transition: transform 0.3s ease-in-out; }
         .carousel-slide { min-width: 100%; }
         .carousel-slide img { width: 100%; display: block; aspect-ratio: 9 / 16; object-fit: cover; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px 15px; font-size: 24px; cursor: pointer; z-index: 10; }
-        .prev-btn { left: 10px; } .next-btn { right: 10px; }
-        .carousel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); cursor: pointer; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; font-size: 18px; cursor: pointer; z-index: 10; border-radius: 50%; width: 40px; height: 40px; }
+        .carousel-btn.prev-btn { left: 10px; } .carousel-btn.next-btn { right: 10px; }
+        .carousel-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255,255,255,0.5); border: none; padding: 0; cursor: pointer; }
         .dot.active { background-color: white; }
-
-        /* --- CALCULADORAS --- */
-        .package-selector, .price-calculator { max-width: 800px; margin: auto; background-color: #1E1E1E; border-radius: 10px; padding: 30px; border: 1px solid #333; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .testimonials-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .testimonial-card { background-color: #1E1E1E; border-radius: 10px; padding: 30px; width: 100%; max-width: 320px; box-sizing: border-box; text-align: center; border-top: 4px solid #007BFF; }
+        .stars { color: #FFD700; font-size: 20px; margin-bottom: 15px; }
+        .testimonial-text { font-style: italic; color: #cccccc; line-height: 1.6; margin-bottom: 20px; }
+        .client-name { font-weight: 700; }
+        .calculators-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .package-selector, .price-calculator { flex: 1; min-width: 400px; max-width: 500px; background-color: #1E1E1E; border-radius: 10px; padding: 30px; border: 1px solid #333; }
         .selector-title, .calculator-title { text-align: center; font-size: 2em; font-weight: 700; margin: 0 0 30px 0; }
         .selector-body, .calculator-body { display: flex; gap: 20px; }
         .package-options, .input-section { flex: 1.5; display: flex; flex-direction: column; gap: 15px; }
         .output-section { flex: 1; display: flex; flex-direction: column; align-items: center; }
         label { font-size: 0.9em; color: #cccccc; margin-bottom: 8px; }
-        .package-btn { font-family: 'Montserrat', sans-serif; font-size: 1.2em; font-weight: 700; text-align: center; padding: 25px 20px; border: 2px solid #444; background-color: #333; color: #fff; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
-        .package-btn:hover { border-color: #007BFF; }
+        .package-btn { font-family: 'Montserrat', sans-serif; font-size: 1.2em; font-weight: 700; text-align: center; padding: 25px 20px; border: 2px solid #444; background-color: #333; color: #fff; border-radius: 8px; cursor: pointer; }
         .package-btn.active { border-color: #25D366; background-color: #2c2c2c; }
-        #priceResult { font-family: 'Montserrat', sans-serif; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 8px; background-color: #121212; padding: 15px; box-sizing: border-box; transition: all 0.3s ease; min-height: 150px; }
+        #priceResult, #groupPriceResult { font-family: 'Montserrat', sans-serif; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 8px; background-color: #121212; padding: 15px; box-sizing: border-box; min-height: 150px; }
         .old-price-display { font-size: 1.1em; color: #FF6B6B; text-decoration: line-through; display: block; }
         .new-price-display { font-size: 2.5em; font-weight: 700; color: #25D366; display: block; }
-        #priceDetails { width: 100%; margin-top: 15px; padding-top: 15px; border-top: 1px solid #333; }
-        #priceDetails ul { list-style: none; padding: 0; margin: 0; text-align: left; }
-        #priceDetails ul li { display: flex; align-items: center; font-size: 0.9em; font-weight: 400; color: #cccccc; margin-bottom: 8px; }
+        #priceDetails ul { list-style: none; padding: 0; margin: 15px 0 0 0; text-align: left; border-top: 1px solid #333; padding-top: 15px; }
+        #priceDetails ul li { display: flex; align-items: center; font-size: 0.9em; color: #cccccc; margin-bottom: 8px; }
         #priceDetails ul li .emoji { font-size: 1em; color: #25D366; margin-right: 10px; }
         .action-buttons { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; display: flex; gap: 15px; justify-content: center; }
-        .action-btn { font-family: 'Montserrat', sans-serif; font-size: 1em; font-weight: 700; padding: 12px 25px; border-radius: 5px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.3s, background-color 0.3s; }
-        #generateIndividualPdfBtn { background-color: #007BFF; color: white; }
-        #sendIndividualWppBtn { background-color: #25D366; color: white; }
-        #generateGroupPdfBtn { background-color: #007BFF; color: white; }
-        #sendGroupWppBtn { background-color: #25D366; color: white; }
-        .action-btn.disabled, .action-btn:disabled { background-color: #444; cursor: not-allowed; opacity: 0.5; }
+        .action-btn { font-family: 'Montserrat', sans-serif; font-size: 1em; font-weight: 700; padding: 12px 25px; border-radius: 5px; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+        .action-btn:disabled, .action-btn.disabled { background-color: #444 !important; cursor: not-allowed; opacity: 0.5; }
+        #generateIndividualPdfBtn, #generateGroupPdfBtn { background-color: #007BFF; color: white; }
+        #sendIndividualWppBtn, #sendGroupWppBtn { background-color: #25D366; color: white; }
         #studentCount { font-family: 'Montserrat', sans-serif; width: 100%; padding: 12px; font-size: 1.5em; border-radius: 5px; border: 1px solid #444; background-color: #333; color: #fff; box-sizing: border-box; }
-        #groupPriceResult { font-family: 'Montserrat', sans-serif; width: 100%; padding: 12px; font-size: 1.5em; font-weight: 700; border-radius: 5px; background-color: #121212; color: #25D366; text-align: center; box-sizing: border-box; }
-        #groupPriceResult.error { color: #FF6B6B; font-size: 1.1em; }
-        #perStudentPrice { font-size: 0.9em; color: #cccccc; text-align: center; margin-top: 8px; height: 20px; }
-
-        /* --- RODAPÉ --- */
-        .site-footer { background-color: #1E1E1E; color: #cccccc; padding: 40px 20px 20px; }
+        .error-message { font-size: 1.1em; color: #FF6B6B; }
+        .per-person-price-wrapper { margin-top: 15px; width: 100%; text-align: center; border-top: 1px solid #333; padding-top: 15px;}
+        .per-person-price-wrapper label { font-size: 1em; font-weight: 700; margin-bottom: 10px; display: block; }
+        .per-person-price { font-size: 1.1em; color: #cccccc; min-height: 45px; }
+        .per-person-price .old-per-person { font-size: 0.9em; color: #FF6B6B; text-decoration: line-through; display: block; margin-bottom: 5px; }
+        .per-person-price .new-per-person {
+            font-size: 1.2em;
+            font-weight: 700;
+            display: block;
+            color: #25D366; /* <<< COR VERDE ADICIONADA AQUI */
+        }
+        .discount-info { font-size: 0.8em; color: #25D366; margin-top: 10px; opacity: 0; transition: opacity 0.5s; min-height: 15px; }
+        .site-footer { background-color: #1E1E1E; padding: 40px 20px 20px; }
         .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto 30px; }
         .footer-column { flex: 1; min-width: 250px; }
-        .footer-column h4 { color: #fff; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px solid #007BFF; padding-bottom: 5px; display: inline-block; }
-        .footer-column a { color: #cccccc; text-decoration: none; font-size: 0.9em; line-height: 1.8; }
-        .social-links a { margin-right: 15px; font-size: 1.5em; }
+        .footer-column h4 { color: #fff; margin-bottom: 15px; border-bottom: 1px solid #007BFF; padding-bottom: 5px; display: inline-block; }
+        .footer-column a { color: #cccccc; text-decoration: none; }
         .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; font-size: 0.8em; color: #888; }
-
-        /* --- WHATSAPP FLUTUANTE --- */
-        .whatsapp-float-button { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25D366; color: #FFF; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25); z-index: 1000; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: transform 0.3s ease; }
-        .whatsapp-float-button:hover { transform: scale(1.1); }
-        
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 768px) {
-            .selector-body, .calculator-body, .action-buttons { flex-direction: column; }
-            .input-section, .output-section, .package-options { width: 100%; }
-        }
+        .whatsapp-float-button { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25D366; color: #FFF; border-radius: 50%; z-index: 1000; display: flex; justify-content: center; align-items: center; text-decoration: none; }
+        @media (max-width: 900px) { .calculators-wrapper { flex-direction: column; align-items: center; } }
+        @media (max-width: 768px) { .two-column-section { flex-direction: column !important; } .main-nav a { margin: 0 8px; font-size: 0.9em; } .selector-body, .calculator-body { flex-direction: column; } }
     </style>
 </head>
 <body>
 
     <nav class="main-nav">
-        <a href="index.html">Início</a>
-        <a href="aniversario.html">Aniversário</a>
-        <a href="corporativo.html">Corporativo</a>
-        <a href="ballet.html">Ballet</a>
-        <a href="casamento.html">Casamento</a>
+        <a href="index.html">Início</a> <a href="aniversario.html">Aniversário</a> <a href="corporativo.html">Corporativo</a> <a href="ballet.html">Ballet</a> <a href="casamento.html">Casamento</a>
     </nav>
-
-    <div class="wrapper">
-        <div class="studio-info">
-             <h2>A Excelência de um Estúdio, com a Comodidade que Você Precisa</h2>
-            <p class="intro-p">Seja para um ensaio individual ou para registrar a harmonia de um grupo, minha missão é a mesma: entregar resultados de qualidade superior, levando uma estrutura de estúdio completa até você.</p>
-        </div>
-    </div>
-    
-    <div class="wrapper" style="padding-top: 0; padding-bottom: 0;">
-        <h2 class="section-title-major">Galeria de Ballet</h2>
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <div class="carousel-slide"><img src="https://images.pexels.com/photos/3808828/pexels-photo-3808828.jpeg" alt="Bailarina em pose vertical"></div>
-                <div class="carousel-slide"><img src="https://images.pexels.com/photos/209948/pexels-photo-209948.jpeg" alt="Sapatilhas de ballet"></div>
-                <div class="carousel-slide"><img src="https://images.pexels.com/photos/8089163/pexels-photo-8089163.jpeg" alt="Bailarina em movimento"></div>
-            </div>
-            <button class="carousel-btn prev-btn">&#10094;</button>
-            <button class="carousel-btn next-btn">&#10095;</button>
-            <div class="carousel-dots"></div>
-        </div>
-    </div>
     
     <div class="wrapper">
-        <div class="package-selector">
-            <h3 class="selector-title">Orçamento para Ensaios Individuais</h3>
-            <div class="selector-body">
-                <div class="package-options">
-                    <label>Escolha o Pacote Desejado:</label>
-                    <button class="package-btn" data-old-price="300" data-price="249.99" data-details="10 fotos digitais editadas|1 hora de ensaio" data-name="Pacote Essencial">Pacote Essencial</button>
-                    <button class="package-btn" data-old-price="420" data-price="349.99" data-details="20 fotos digitais editadas|2 horas de ensaio|3 fotos reveladas (2x 10x15 e 1x 15x21)" data-name="Pacote Completo">Pacote Completo</button>
-                </div>
-                <div class="output-section">
-                    <label>Valor do Investimento:</label>
-                    <div id="priceResult">Selecione um pacote</div>
-                </div>
+        <div class="two-column-section">
+            <div class="image-content"><img src="images/exemplo-bailarina-1.jpg" alt="Bailarina em pose artística"></div>
+            <div class="text-content"><h2>A Arte em Movimento, Eternizada</h2><p>Anos de dedicação e horas em frente ao espelho. A dança é uma arte que vive no instante, mas que merece ser mais do que uma memória passageira. Um ensaio fotográfico de ballet é a celebração de toda a sua jornada.</p></div>
+        </div>
+    </div>
+    <div class="wrapper" style="background-color: #1E1E1E;">
+        <div class="two-column-section reverse">
+            <div class="image-content"><img src="images/exemplo-estudio.jpg" alt="Equipamento de estúdio fotográfico móvel"></div>
+            <div class="text-content">
+                <h2>A Excelência de um Estúdio, Onde Você Precisa</h2>
+                <div class="advantage-box"><h4>Para Indivíduos e Grupos</h4><p>Levamos uma estrutura de estúdio completa até sua escola ou local de preferência, garantindo qualidade profissional com total comodidade para todos.</p></div>
             </div>
-            <div class="action-buttons">
-                <button id="generateIndividualPdfBtn" class="action-btn" disabled>📄 Gerar PDF da Proposta</button>
-                <a id="sendIndividualWppBtn" class="action-btn disabled" href="#" target="_blank">💬 Enviar via WhatsApp</a>
-            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <h2 class="section-title-major">Nossas Galerias</h2>
+        <div class="multi-carousel-container">
+            <div id="carousel1" class="carousel-container"><div class="carousel-track"><div class="carousel-slide"><img src="images/ballet-exemplo-1.jpg" alt="Foto 1"></div><div class="carousel-slide"><img src="images/ballet-exemplo-2.jpg" alt="Foto 2"></div></div><button class="carousel-btn prev-btn">&#10094;</button><button class="carousel-btn next-btn">&#10095;</button><div class="carousel-dots"></div></div>
+            <div id="carousel2" class="carousel-container"><div class="carousel-track"><div class="carousel-slide"><img src="images/ballet-exemplo-3.jpg" alt="Foto 3"></div><div class="carousel-slide"><img src="images/ballet-exemplo-4.jpg" alt="Foto 4"></div></div><button class="carousel-btn prev-btn">&#10094;</button><button class="carousel-btn next-btn">&#10095;</button><div class="carousel-dots"></div></div>
+            <div id="carousel3" class="carousel-container"><div class="carousel-track"><div class="carousel-slide"><img src="images/ballet-exemplo-5.jpg" alt="Foto 5"></div><div class="carousel-slide"><img src="images/ballet-exemplo-6.jpg" alt="Foto 6"></div></div><button class="carousel-btn prev-btn">&#10094;</button><button class="carousel-btn next-btn">&#10095;</button><div class="carousel-dots"></div></div>
+        </div>
+    </div>
+    <div class="wrapper" style="background-color: #1E1E1E;">
+        <h2 class="section-title-major">O que Nossos Clientes Dizem</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"Que trabalho impecável! Desde a paciência durante o ensaio até a entrega, tudo perfeito. Conseguiu capturar a doçura e a força da minha pequena bailarina."</p><p class="client-name">- Mônica, Mãe da Clara</p></div>
+            <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"O ensaio virou uma brincadeira e minha filha se divertiu do início ao fim. O resultado não poderia ser outro: fotos espontâneas que mostram a alegria dela em dançar."</p><p class="client-name">- Ana, Mãe da Julia</p></div>
+            <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"Fiquei sem palavras quando vi as fotos. Ver a dedicação da minha pequena registrada com tanto carinho e arte foi emocionante. Memórias para a vida toda!"</p><p class="client-name">- Família Andrade</p></div>
         </div>
     </div>
 
     <div class="wrapper">
-        <div class="price-calculator">
-            <h3 class="calculator-title">Orçamento para Grupos</h3>
-            <div class="calculator-body">
-                <div class="input-section">
-                    <label for="studentCount">Nº de dançarinos(as):</label>
-                    <input type="number" id="studentCount" placeholder="Mín. 8" min="1">
+        <h2 class="section-title-major">Pacotes e Orçamentos</h2>
+        <div class="calculators-wrapper">
+            <div class="package-selector">
+                <h3 class="selector-title">Orçamento para Ensaios Individuais</h3>
+                <div class="selector-body">
+                    <div class="package-options">
+                        <label>Escolha o Pacote:</label>
+                        <button class="package-btn" data-old-price="300" data-price="249.99" data-details="10 fotos editadas|1 hora de ensaio" data-name="Pacote Essencial">Pacote Essencial</button>
+                        <button class="package-btn" data-old-price="420" data-price="349.99" data-details="20 fotos editadas|2h de ensaio|3 fotos reveladas" data-name="Pacote Completo">Pacote Completo</button>
+                    </div>
+                    <div class="output-section">
+                        <label>Investimento:</label>
+                        <div id="priceResult">Selecione um pacote</div>
+                    </div>
                 </div>
-                <div class="output-section">
-                    <label>Valor Total do Investimento:</label>
-                    <div id="groupPriceResult">R$ 0,00</div>
-                    <div id="perStudentPrice"></div>
+                <div class="action-buttons">
+                    <button id="generateIndividualPdfBtn" class="action-btn" disabled>📄 Gerar PDF</button>
+                    <a id="sendIndividualWppBtn" class="action-btn disabled" href="#" target="_blank">💬 WhatsApp</a>
                 </div>
             </div>
-             <div class="action-buttons">
-                <button id="generateGroupPdfBtn" class="action-btn" disabled>📄 Gerar PDF da Proposta</button>
-                <a id="sendGroupWppBtn" class="action-btn disabled" href="#" target="_blank">💬 Enviar via WhatsApp</a>
+            <div class="price-calculator">
+                <h3 class="calculator-title">Orçamento para Grupos</h3>
+                <div class="calculator-body">
+                    <div class="input-section">
+                        <label>Nº de dançarinos(as):</label>
+                        <input type="number" id="studentCount" placeholder="Mín. 8" min="1">
+                    </div>
+                    <div class="output-section">
+                        <label>Investimento Total:</label>
+                        <div id="groupPriceResult">Digite um número</div>
+                        <div class="per-person-price-wrapper">
+                            <label>Valor por Dançarino(a):</label>
+                            <div id="perStudentPrice" class="per-person-price"></div>
+                            <p class="discount-info" id="groupDiscountInfo"></p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="action-buttons">
+                    <button id="generateGroupPdfBtn" class="action-btn" disabled>📄 Gerar PDF</button>
+                    <a id="sendGroupWppBtn" class="action-btn disabled" href="#" target="_blank">💬 WhatsApp</a>
+                </div>
             </div>
         </div>
     </div>
@@ -167,124 +171,128 @@
         <div class="footer-bottom"> <p>&copy; <span id="year"></span> Paiva Studio Maker. Todos os direitos reservados.</p> </div>
     </footer>
 
-    <a href="https://wa.me/5581988343068" class="whatsapp-float-button" target="_blank" aria-label="Fale conosco no WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
-    </a>
-
+    <a href="https://wa.me/5581988343068" class="whatsapp-float-button" target="_blank" aria-label="Fale conosco no WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg></a>
+    
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- SCRIPT DO CARROSSEL ---
-        const track = document.querySelector('.carousel-track');
-        if (track) {
-            const slides = Array.from(track.children);
-            const nextButton = document.querySelector('.next-btn');
-            const prevButton = document.querySelector('.prev-btn');
-            const dotsNav = document.querySelector('.carousel-dots');
-            if (slides.length > 0) {
-                slides.forEach((slide, index) => {
-                    const dot = document.createElement('button');
-                    dot.classList.add('dot');
-                    dotsNav.appendChild(dot);
-                    dot.addEventListener('click', () => goToSlide(index));
-                });
-                const dots = Array.from(dotsNav.children);
-                let currentIndex = 0;
-                const updateSlideAndDots = (targetIndex) => {
-                    track.style.transform = 'translateX(-' + 100 * targetIndex + '%)';
-                    if(dots[currentIndex]) dots[currentIndex].classList.remove('active');
-                    if(dots[targetIndex]) dots[targetIndex].classList.add('active');
-                    currentIndex = targetIndex;
-                };
-                const goToSlide = (targetIndex) => { updateSlideAndDots(targetIndex); };
-                const nextSlide = () => { goToSlide((currentIndex + 1) % slides.length); };
-                nextButton.addEventListener('click', () => nextSlide());
-                prevButton.addEventListener('click', () => { goToSlide((currentIndex - 1 + slides.length) % slides.length); });
-                setInterval(nextSlide, 3000);
-                updateSlideAndDots(0);
-            }
-        }
+        const seuNumeroWhatsApp = '5581988343068'; 
+        function formatCurrency(v){ const n=parseFloat(v); return isNaN(n)?"0,00":n.toFixed(2).replace(".",",") }
 
-        // --- SCRIPT DA CALCULADORA INDIVIDUAL ---
+        function initCarousel(id) {
+            const container = document.getElementById(id);
+            if (!container) return;
+            const track = container.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            const nextButton = container.querySelector('.next-btn');
+            const prevButton = container.querySelector('.prev-btn');
+            const dotsNav = container.querySelector('.carousel-dots');
+            if (slides.length <= 1) {
+                if(nextButton) nextButton.style.display = 'none';
+                if(prevButton) prevButton.style.display = 'none';
+                return;
+            }
+            slides.forEach((_, i) => { const dot = document.createElement('button'); dot.classList.add('dot'); dotsNav.appendChild(dot); dot.addEventListener('click', () => goToSlide(i)); });
+            const dots = Array.from(dotsNav.children);
+            let currentIndex = 0;
+            const goToSlide = (index) => { track.style.transform = `translateX(-${100 * index}%)`; if(dots[currentIndex]) dots[currentIndex].classList.remove('active'); if(dots[index]) dots[index].classList.add('active'); currentIndex = index; };
+            const nextSlide = () => goToSlide((currentIndex + 1) % slides.length);
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', () => goToSlide((currentIndex - 1 + slides.length) % slides.length));
+            setInterval(nextSlide, 5000);
+            goToSlide(0);
+        }
+        initCarousel('carousel1'); initCarousel('carousel2'); initCarousel('carousel3');
+
         const packageButtons = document.querySelectorAll('.package-btn');
         const priceResult = document.getElementById('priceResult');
         const generateIndividualPdfBtn = document.getElementById('generateIndividualPdfBtn');
         const sendIndividualWppBtn = document.getElementById('sendIndividualWppBtn');
-        const seuNumeroWhatsApp = '5581988343068'; 
         let individualProposalData = {};
-
-        function formatCurrency(value) {
-            const number = parseFloat(value);
-            return isNaN(number) ? "0,00" : number.toFixed(2).replace('.', ',');
-        }
-
-        if(packageButtons.length > 0) {
+        if (packageButtons.length > 0 && priceResult) {
             packageButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     packageButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
                     individualProposalData = { name: button.getAttribute('data-name'), oldPrice: button.getAttribute('data-old-price'), newPrice: button.getAttribute('data-price'), details: button.getAttribute('data-details') };
-                    const benefitsArray = individualProposalData.details.split('|');
-                    let benefitsHTML = '<ul>';
-                    benefitsArray.forEach(item => { benefitsHTML += `<li><span class="emoji">✓</span> ${item.trim()}</li>`; });
-                    benefitsHTML += '</ul>';
+                    let benefitsHTML = '<ul>' + individualProposalData.details.split('|').map(item => `<li><span class="emoji">✓</span> ${item.trim()}</li>`).join('') + '</ul>';
                     priceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(individualProposalData.oldPrice)}</span><span class="new-price-display">Por R$ ${formatCurrency(individualProposalData.newPrice)}</span><div id="priceDetails">${benefitsHTML}</div>`;
-                    generateIndividualPdfBtn.disabled = false;
-                    sendIndividualWppBtn.classList.remove('disabled');
-                    const mensagemWpp = encodeURIComponent(`Olá! Tenho interesse no ${individualProposalData.name}, no valor de R$ ${formatCurrency(individualProposalData.newPrice)}.`);
-                    sendIndividualWppBtn.href = `https://wa.me/${seuNumeroWhatsApp}?text=${mensagemWpp}`;
+                    if(generateIndividualPdfBtn) generateIndividualPdfBtn.disabled = false;
+                    if(sendIndividualWppBtn) {
+                        sendIndividualWppBtn.classList.remove('disabled');
+                        sendIndividualWppBtn.href = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(`Olá! Tenho interesse no ${individualProposalData.name}, no valor de R$ ${formatCurrency(individualProposalData.newPrice)}.`)}`;
+                    }
                 });
             });
+            if(generateIndividualPdfBtn) generateIndividualPdfBtn.addEventListener('click', generateIndividualPDF);
         }
-        
-        // --- SCRIPT DA CALCULADORA DE GRUPO ---
+
         const studentCountInput = document.getElementById('studentCount');
         const groupPriceResult = document.getElementById('groupPriceResult');
-        const perStudentPrice = document.getElementById('perStudentPrice');
+        const perStudentPriceDisplay = document.getElementById('perStudentPrice');
+        const groupDiscountInfo = document.getElementById('groupDiscountInfo');
         const generateGroupPdfBtn = document.getElementById('generateGroupPdfBtn');
         const sendGroupWppBtn = document.getElementById('sendGroupWppBtn');
         let groupProposalData = {};
         
-        function calculateGroupPrice() {
-             const count = parseInt(studentCountInput.value);
-            let totalPrice = 0; let pricePerStudent = 0;
-            if (isNaN(count) || count < 8) {
-                groupPriceResult.textContent = count > 0 ? 'Mínimo de 8' : 'R$ 0,00';
-                groupPriceResult.classList.toggle('error', count > 0);
-                perStudentPrice.textContent = '';
-                generateGroupPdfBtn.disabled = true; sendGroupWppBtn.classList.add('disabled');
-                return;
+        function getGroupPricePerStudent(num) {
+            if (num < 8) return 0;
+            if (num >= 8 && num <= 10) { return 550 / num; }
+            if (num >= 11 && num <= 100) {
+                const startPrice = 45, endPrice = 30, startCount = 11, endCount = 100;
+                return startPrice - ((num - startCount) * ((startPrice - endPrice) / (endCount - startCount)));
             }
-            groupPriceResult.classList.remove('error');
-            if (count >= 8 && count <= 10) { totalPrice = 550; pricePerStudent = totalPrice / count; } 
-            else if (count >= 11 && count <= 100) {
-                const startPrice = 45; const endPrice = 30; const startCount = 11; const endCount = 100;
-                const priceRange = startPrice - endPrice; const countRange = endCount - startCount;
-                const discountPerStudent = priceRange / countRange;
-                pricePerStudent = startPrice - ((count - startCount) * discountPerStudent);
-                totalPrice = count * pricePerStudent;
-            } else {
-                groupPriceResult.textContent = 'Consulte-nos'; perStudentPrice.textContent = 'Condições especiais!';
-                generateGroupPdfBtn.disabled = true; sendGroupWppBtn.classList.add('disabled');
-                return;
-            }
-            groupProposalData = { count: count, total: `R$ ${formatCurrency(totalPrice)}`, perStudent: `(Aprox. R$ ${formatCurrency(pricePerStudent)} por pessoa)` };
-            groupPriceResult.textContent = groupProposalData.total;
-            perStudentPrice.textContent = groupProposalData.perStudent;
-            generateGroupPdfBtn.disabled = false; sendGroupWppBtn.classList.remove('disabled');
-            const mensagemWpp = encodeURIComponent(`Olá! Gostaria de um orçamento para um grupo de ${count} pessoas, no valor de ${groupProposalData.total}.`);
-            sendGroupWppBtn.href = `https://wa.me/${seuNumeroWhatsApp}?text=${mensagemWpp}`;
+            return 0;
         }
-        
+
+        function calculateGroupPrice() {
+            const basePricePerStudent = 55;
+            const count = parseInt(studentCountInput.value);
+            
+            const resetButtonState = (message = 'Digite um número') => {
+                groupPriceResult.innerHTML = `<span>${message}</span>`;
+                perStudentPriceDisplay.innerHTML = '';
+                groupDiscountInfo.style.opacity = 0;
+                if(generateGroupPdfBtn) generateGroupPdfBtn.disabled = true; 
+                if(sendGroupWppBtn) sendGroupWppBtn.classList.add('disabled');
+            };
+
+            if (isNaN(count) || count <= 0) { return resetButtonState(); }
+            if (count < 8) { return resetButtonState('<span class="error-message">Mínimo de 8</span>'); }
+
+            const pricePerStudentNum = getGroupPricePerStudent(count);
+            if (pricePerStudentNum === 0 && count > 100) {
+                 groupPriceResult.innerHTML = `<span>Consulte-nos</span>`;
+                perStudentPriceDisplay.innerHTML = '';
+                groupDiscountInfo.textContent = 'Condições especiais!';
+                groupDiscountInfo.style.opacity = 1;
+                generateGroupPdfBtn.disabled = true; 
+                sendGroupWppBtn.classList.add('disabled');
+                return;
+            }
+
+            const totalPrice = count * pricePerStudentNum;
+            const originalTotalPrice = count * basePricePerStudent;
+            const oldPerStudentPrice = (count === 8) ? basePricePerStudent : getGroupPricePerStudent(count - 1);
+
+            groupProposalData = { count, total: totalPrice, originalTotal: originalTotalPrice, perStudent: pricePerStudentNum, oldPerStudent: oldPerStudentPrice };
+            
+            groupPriceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(originalTotalPrice)}</span><span class="new-price-display">R$ ${formatCurrency(totalPrice)}</span>`;
+            perStudentPriceDisplay.innerHTML = `<span class="old-per-person">De R$ ${formatCurrency(oldPerStudentPrice)}</span> <span class="new-per-person">Por R$ ${formatCurrency(pricePerStudentNum)}</span>`;
+            groupDiscountInfo.textContent = 'Quanto maior o grupo, maior o desconto!';
+            groupDiscountInfo.style.opacity = 1;
+            
+            if(generateGroupPdfBtn) generateGroupPdfBtn.disabled = false; 
+            if(sendGroupWppBtn) {
+                sendGroupWppBtn.classList.remove('disabled');
+                sendGroupWppBtn.href = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(`Olá! Orçamento para grupo de ${count} pessoas: R$ ${formatCurrency(totalPrice)}.`)}`;
+            }
+        }
         if(studentCountInput) studentCountInput.addEventListener('input', calculateGroupPrice);
-
-        // --- FUNÇÕES DE GERAR PDF ---
-        function generateIndividualPDF() { /* ... código do PDF individual ... */ }
-        function generateGroupPDF() { /* ... código do PDF de grupo ... */ }
-
-        if(generateIndividualPdfBtn) generateIndividualPdfBtn.addEventListener('click', generateIndividualPDF);
         if(generateGroupPdfBtn) generateGroupPdfBtn.addEventListener('click', generateGroupPDF);
+        
+        function generateIndividualPDF() { /* PDF Individual */ }
+        function generateGroupPDF() { /* PDF Grupo */ }
 
-        // --- SCRIPT DO RODAPÉ ---
         const yearSpan = document.getElementById('year');
         if(yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
