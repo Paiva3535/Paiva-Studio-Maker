@@ -6,17 +6,44 @@
     <title>Portfólio de Ballet - Paiva Studio Maker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        /* Cole aqui os estilos da sua calculadora e do rodapé, se quiser um arquivo CSS separado. 
-           Por simplicidade, vamos colocar os estilos principais aqui. */
+        /* --- ESTILOS GERAIS --- */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
         body { font-family: 'Montserrat', sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 0; }
-        
-        /* Menu de Navegação Simples */
-        .main-nav { background-color: #1E1E1E; padding: 15px 30px; text-align: center; }
-        .main-nav a { color: #fff; text-decoration: none; font-weight: 700; margin: 0 15px; }
+        .wrapper { padding: 40px 20px; }
+
+        /* --- MENU DE NAVEGAÇÃO --- */
+        .main-nav { background-color: #1E1E1E; padding: 15px 30px; text-align: center; border-bottom: 1px solid #333; }
+        .main-nav a { color: #fff; text-decoration: none; font-weight: 700; margin: 0 15px; transition: color 0.3s; }
         .main-nav a:hover { color: #007BFF; }
 
-        /* Cole aqui o CSS das outras seções (carrossel, calculadora, etc.) que você usar nesta página */
+        /* --- ESTÚDIO MÓVEL --- */
+        .studio-info { max-width: 900px; margin: auto; text-align: center; }
+        .studio-info h2 { font-size: 2em; margin: 0 0 15px 0; }
+        .studio-info .intro-p { font-size: 1.1em; line-height: 1.7; color: #cccccc; margin-bottom: 40px; }
+        .advantages-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: left; }
+        .advantage-box { flex: 1; min-width: 300px; background-color: #1E1E1E; padding: 25px; border-radius: 8px; border-left: 4px solid #007BFF; }
+        .advantage-box h4 { font-size: 1.2em; margin: 0 0 10px 0; }
+        .advantage-box p { font-size: 0.95em; line-height: 1.6; color: #cccccc; margin: 0; }
+
+        /* --- CARROSSEL --- */
+        .carousel-container { max-width: 500px; width: 90%; margin: auto; position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .carousel-track { display: flex; transition: transform 0.3s ease-in-out; }
+        .carousel-slide { min-width: 100%; }
+        .carousel-slide img { width: 100%; display: block; aspect-ratio: 4 / 5; object-fit: cover; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px 15px; font-size: 24px; cursor: pointer; z-index: 10; }
+        .prev-btn { left: 10px; } .next-btn { right: 10px; }
+        .carousel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); cursor: pointer; }
+        .dot.active { background-color: white; }
+
+        /* --- CALCULADORAS --- */
+        .package-selector, .price-calculator { max-width: 800px; margin: auto; background-color: #1E1E1E; border-radius: 10px; padding: 30px; border: 1px solid #333; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .selector-title, .calculator-title { text-align: center; font-size: 2em; font-weight: 700; margin: 0 0 30px 0; }
+        .selector-body, .calculator-body { display: flex; gap: 20px; }
+        .package-options, .input-section { flex: 1.5; }
+        .output-section { flex: 1; }
+        /* Adicione aqui os outros estilos das calculadoras, depoimento, rodapé e botão do WhatsApp... */
+        /* (Os estilos completos estão no código HTML, esta é uma visão geral) */
 
     </style>
 </head>
@@ -30,5 +57,28 @@
         <a href="casamento.html">Casamento</a>
     </nav>
 
+    <div class="wrapper">
+        <div class="studio-info">
+             <h2>A Excelência de um Estúdio, com a Comodidade que Você Precisa</h2>
+            <p class="intro-p">
+                Seja para um ensaio individual focado na performance de um artista ou para registrar a harmonia de um grupo, minha missão é a mesma: entregar resultados de qualidade superior. Para isso, levo uma estrutura de estúdio completa até a sua escola, academia ou local de preferência.
+            </p>
+            <div class="advantages-container">
+                <div class="advantage-box">
+                    <h4>Para Ensaios Individuais</h4>
+                    <p>Criamos um ambiente controlado e familiar, onde a iluminação perfeita destaca sua técnica e expressão, permitindo que você se concentre totalmente na sua arte com conforto e confiança.</p>
+                </div>
+                <div class="advantage-box">
+                    <h4>Para Grupos e Escolas</h4>
+                    <p>Eliminamos a complexidade de deslocar vários dançarinos, garantindo que todos sejam fotografados com o mesmo padrão de qualidade profissional, ideal para divulgação ou recordações.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wrapper" style="padding-top: 0;">
+         <h2 style="text-align:center; font-size: 2em; margin-bottom: 30px;">Explore a Galeria</h2>
+        </div>
+    
     </body>
 </html>
