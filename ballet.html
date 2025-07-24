@@ -58,16 +58,6 @@
         #sendIndividualWppBtn, #sendGroupWppBtn { background-color: #25D366; color: white; }
         #studentCount { font-family: 'Montserrat', sans-serif; width: 100%; padding: 12px; font-size: 1.5em; border-radius: 5px; border: 1px solid #444; background-color: #333; color: #fff; box-sizing: border-box; }
         .error-message { font-size: 1.1em; color: #FF6B6B; }
-        .per-person-price-wrapper { margin-top: 15px; width: 100%; text-align: center; border-top: 1px solid #333; padding-top: 15px;}
-        .per-person-price-wrapper label { font-size: 1em; font-weight: 700; margin-bottom: 10px; display: block; }
-        .per-person-price { font-size: 1.1em; color: #cccccc; min-height: 45px; }
-        .per-person-price .old-per-person { font-size: 0.9em; color: #FF6B6B; text-decoration: line-through; display: block; margin-bottom: 5px; }
-        .per-person-price .new-per-person { font-size: 1.2em; font-weight: 700; display: block; color: #25D366; }
-        .benefits-section { margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
-        .benefits-section h4 { font-size: 1.2em; text-align: center; margin: 0 0 15px 0; }
-        .benefits-section ul { list-style: none; padding: 0; margin: 0; color: #cccccc; text-align: left; }
-        .benefits-section ul li { padding: 8px 0; display: flex; align-items: center; }
-        .benefits-section ul li::before { content: '✓'; color: #25D366; font-weight: 700; margin-right: 10px; }
         .site-footer { background-color: #1E1E1E; padding: 40px 20px 20px; }
         .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto 30px; }
         .footer-column { flex: 1; min-width: 250px; }
@@ -84,7 +74,7 @@
     <nav class="main-nav">
         <a href="index.html">Início</a> <a href="aniversario.html">Aniversário</a> <a href="corporativo.html">Corporativo</a> <a href="ballet.html">Ballet</a> <a href="casamento.html">Casamento</a>
     </nav>
-
+    
     <div class="wrapper">
         <div class="two-column-section">
             <div class="image-content"><img src="images/exemplo-bailarina-1.jpg" alt="Bailarina em pose artística"></div>
@@ -132,36 +122,17 @@
             </div>
             
             <div class="price-calculator">
-    <h3 class="calculator-title">Orçamento para Grupos</h3>
-    <div class="calculator-body">
-        <div class="input-section">
-            <label for="studentCount">Nº de dançarinos(as):</label>
-            <input type="number" id="studentCount" placeholder="Mín. 8" min="1">
-        </div>
-        <div class="output-section">
-            <label>Investimento Total:</label>
-            <div id="groupPriceResult">Digite um número</div>
-            <div class="per-person-price-wrapper">
-                <label>Valor por Dançarino(a):</label>
-                <div id="perStudentPrice" class="per-person-price"></div>
+                <h3 class="calculator-title">Orçamento para Grupos</h3>
+                <div class="calculator-body">
+                    <div class="input-section"><label for="studentCount">Nº de dançarinos(as):</label><input type="number" id="studentCount" placeholder="Mín. 8" min="1"></div>
+                    <div class="output-section"><label>Investimento Total:</label><div id="groupPriceResult">Digite um número</div></div>
+                </div>
+                <div id="group-details-wrapper" class="priceDetails" style="display: none;"></div>
+                 <div class="action-buttons">
+                    <button id="generateGroupPdfBtn" class="action-btn" disabled>📄 Gerar PDF</button>
+                    <a id="sendGroupWppBtn" class="action-btn disabled" href="#" target="_blank">💬 WhatsApp</a>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="benefits-section">
-        <h4>O que está incluso no valor de grupo:</h4>
-        <ul>
-            <li>3 fotos digitais por dançarino(a), editadas profissionalmente.</li>
-            <li>1 foto revelada (10x15) para cada participante.</li>
-            <li>Duração do ensaio a combinar com o grupo.</li>
-        </ul>
-    </div>
-
-     <div class="action-buttons">
-        <button id="generateGroupPdfBtn" class="action-btn" disabled>📄 Gerar PDF</button>
-        <a id="sendGroupWppBtn" class="action-btn disabled" href="#" target="_blank">💬 WhatsApp</a>
-    </div>
-</div>
         </div>
     </div>
 
@@ -180,7 +151,6 @@
         const seuNumeroWhatsApp = '5581988343068'; 
         function formatCurrency(v){ const n=parseFloat(v); return isNaN(n)?"0,00":n.toFixed(2).replace(".",",") }
 
-        // --- LÓGICA DO CARROSSEL (SEM ALTERAÇÕES) ---
         function initCarousel(id) {
             const container = document.getElementById(id); if (!container) return;
             const track = container.querySelector('.carousel-track'); const slides = Array.from(track.children);
@@ -197,7 +167,6 @@
         }
         initCarousel('carousel1'); initCarousel('carousel2'); initCarousel('carousel3');
 
-        // --- LÓGICA DA CALCULADORA INDIVIDUAL (SEM ALTERAÇÕES) ---
         const packageButtons = document.querySelectorAll('.package-btn');
         const priceResult = document.getElementById('priceResult');
         const generateIndividualPdfBtn = document.getElementById('generateIndividualPdfBtn');
@@ -208,7 +177,7 @@
                 button.addEventListener('click', () => {
                     packageButtons.forEach(btn => btn.classList.remove('active')); button.classList.add('active');
                     individualProposalData = { name: button.getAttribute('data-name'), oldPrice: button.getAttribute('data-old-price'), newPrice: button.getAttribute('data-price'), details: button.getAttribute('data-details') };
-                    let benefitsHTML = '<ul class="priceDetails">' + individualProposalData.details.split('|').map(item => `<li><span class="emoji">✓</span> ${item.trim()}</li>`).join('') + '</ul>';
+                    let benefitsHTML = '<ul>' + individualProposalData.details.split('|').map(item => `<li><span class="emoji">✓</span> ${item.trim()}</li>`).join('') + '</ul>';
                     priceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(individualProposalData.oldPrice)}</span><span class="new-price-display">Por R$ ${formatCurrency(individualProposalData.newPrice)}</span><div class="priceDetails">${benefitsHTML}</div>`;
                     if(generateIndividualPdfBtn) generateIndividualPdfBtn.disabled = false;
                     if(sendIndividualWppBtn) {
@@ -220,67 +189,48 @@
             if(generateIndividualPdfBtn) generateIndividualPdfBtn.addEventListener('click', () => { /* generateIndividualPDF function */ });
         }
 
-        // --- LÓGICA CORRIGIDA E COMPLETA DA CALCULADORA DE GRUPO ---
         const studentCountInput = document.getElementById('studentCount');
         const groupPriceResult = document.getElementById('groupPriceResult');
-        const perStudentPriceDisplay = document.getElementById('perStudentPrice');
+        const groupDetailsWrapper = document.getElementById('group-details-wrapper');
         const generateGroupPdfBtn = document.getElementById('generateGroupPdfBtn');
         const sendGroupWppBtn = document.getElementById('sendGroupWppBtn');
         let groupProposalData = {};
-        
-        function getGroupPricePerStudent(num) {
-            if (num < 8) return 0;
-            if (num >= 8 && num <= 10) { return 550 / num; }
-            if (num >= 11 && num <= 100) {
-                const startPrice = 45, endPrice = 30, startCount = 11, endCount = 100;
-                return startPrice - ((num - startCount) * ((startPrice - endPrice) / (endCount - startCount)));
-            }
-            return 0;
-        }
-
         function calculateGroupPrice() {
-            const basePricePerStudent = 55;
+            if (!studentCountInput) return;
             const count = parseInt(studentCountInput.value);
-            
-            const resetButtonState = (message = 'Digite um número') => {
-                groupPriceResult.innerHTML = `<span>${message}</span>`;
-                perStudentPriceDisplay.innerHTML = '';
+            if (isNaN(count) || count < 8) {
+                if(groupPriceResult) groupPriceResult.innerHTML = `<span class="error-message">${count > 0 ? 'Mínimo de 8' : 'Digite um número'}</span>`;
+                if(groupDetailsWrapper) groupDetailsWrapper.style.display = 'none';
                 if(generateGroupPdfBtn) generateGroupPdfBtn.disabled = true; 
                 if(sendGroupWppBtn) sendGroupWppBtn.classList.add('disabled');
-            };
-
-            if (isNaN(count) || count <= 0) { return resetButtonState(); }
-            if (count < 8) { return resetButtonState('<span class="error-message">Mínimo de 8</span>'); }
-
-            const pricePerStudentNum = getGroupPricePerStudent(count);
-            
-            if (pricePerStudentNum === 0 && count > 100) {
-                 groupPriceResult.innerHTML = `<span>Consulte-nos</span>`;
-                perStudentPriceDisplay.innerHTML = '';
-                generateGroupPdfBtn.disabled = true; 
-                sendGroupWppBtn.classList.add('disabled');
                 return;
             }
-
-            const totalPrice = count * pricePerStudentNum;
-            const originalTotalPrice = count * basePricePerStudent;
-            const oldPerStudentPrice = (count <= 10) ? basePricePerStudent : getGroupPricePerStudent(count - 1);
-
-            groupProposalData = { count, total: totalPrice, originalTotal: originalTotalPrice, perStudent: pricePerStudentNum, oldPerStudent: oldPerStudentPrice };
-            
-            groupPriceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(originalTotalPrice)}</span><span class="new-price-display">Por R$ ${formatCurrency(totalPrice)}</span>`;
-            perStudentPriceDisplay.innerHTML = `<span class="old-per-person">De R$ ${formatCurrency(oldPerStudentPrice)}</span> <span class="new-per-person">Por R$ ${formatCurrency(pricePerStudentNum)}</span>`;
-            
+            if(groupDetailsWrapper) groupDetailsWrapper.style.display = 'block';
+            let totalPrice = 0;
+            if (count <= 10) { totalPrice = 550; }
+            else if (count <= 100) {
+                const startPrice = 45, endPrice = 30, startCount = 11, endCount = 100;
+                let pricePerStudentNum = startPrice - ((count - startCount) * ((startPrice - endPrice) / (endCount - startCount)));
+                totalPrice = count * pricePerStudentNum;
+            } else {
+                if(groupPriceResult) groupPriceResult.innerHTML = `<span>Consulte-nos</span>`;
+                if(groupDetailsWrapper) groupDetailsWrapper.style.display = 'none';
+                if(generateGroupPdfBtn) generateGroupPdfBtn.disabled = true; 
+                if(sendGroupWppBtn) sendGroupWppBtn.classList.add('disabled');
+                return;
+            }
+            const originalTotalPrice = count * 55;
+            groupProposalData = { count, total: totalPrice, originalTotal: originalTotalPrice, details: "3 fotos digitais por pessoa|1 foto revelada (10x15)|Duração a combinar" };
+            let benefitsHTML = '<ul>' + groupProposalData.details.split('|').map(item => `<li><span class="emoji">✓</span> ${item.trim()}</li>`).join('') + '</ul>';
+            groupPriceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(originalTotalPrice)}</span><span class="new-price-display">R$ ${formatCurrency(totalPrice)}</span><div class="priceDetails">${benefitsHTML}</div>`;
             if(generateGroupPdfBtn) generateGroupPdfBtn.disabled = false; 
             if(sendGroupWppBtn) {
                 sendGroupWppBtn.classList.remove('disabled');
                 sendGroupWppBtn.href = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(`Olá! Orçamento para grupo de ${count} pessoas: R$ ${formatCurrency(totalPrice)}.`)}`;
             }
         }
-        
         if(studentCountInput) studentCountInput.addEventListener('input', calculateGroupPrice);
         
-        // --- SCRIPT DO RODAPÉ ---
         const yearSpan = document.getElementById('year');
         if(yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
