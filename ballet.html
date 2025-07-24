@@ -61,12 +61,7 @@
         .per-person-price-wrapper label { font-size: 1em; font-weight: 700; margin-bottom: 10px; display: block; }
         .per-person-price { font-size: 1.1em; color: #cccccc; min-height: 45px; }
         .per-person-price .old-per-person { font-size: 0.9em; color: #FF6B6B; text-decoration: line-through; display: block; margin-bottom: 5px; }
-        .per-person-price .new-per-person {
-            font-size: 1.2em;
-            font-weight: 700;
-            display: block;
-            color: #25D366; /* <<< COR VERDE ADICIONADA AQUI */
-        }
+        .per-person-price .new-per-person { font-size: 1.2em; font-weight: 700; display: block; color: #25D366; }
         .discount-info { font-size: 0.8em; color: #25D366; margin-top: 10px; opacity: 0; transition: opacity 0.5s; min-height: 15px; }
         .site-footer { background-color: #1E1E1E; padding: 40px 20px 20px; }
         .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto 30px; }
@@ -84,22 +79,30 @@
     <nav class="main-nav">
         <a href="index.html">Início</a> <a href="aniversario.html">Aniversário</a> <a href="corporativo.html">Corporativo</a> <a href="ballet.html">Ballet</a> <a href="casamento.html">Casamento</a>
     </nav>
-    
+
     <div class="wrapper">
         <div class="two-column-section">
             <div class="image-content"><img src="images/exemplo-bailarina-1.jpg" alt="Bailarina em pose artística"></div>
-            <div class="text-content"><h2>A Arte em Movimento, Eternizada</h2><p>Anos de dedicação e horas em frente ao espelho. A dança é uma arte que vive no instante, mas que merece ser mais do que uma memória passageira. Um ensaio fotográfico de ballet é a celebração de toda a sua jornada.</p></div>
+            <div class="text-content">
+                <h2>A Arte em Movimento, Eternizada</h2>
+                <p>Anos de dedicação e horas em frente ao espelho. A dança é uma arte que vive no instante, mas que merece ser mais do que uma memória passageira. Um ensaio fotográfico de ballet é a celebração de toda a sua jornada.</p>
+            </div>
         </div>
     </div>
+
     <div class="wrapper" style="background-color: #1E1E1E;">
         <div class="two-column-section reverse">
             <div class="image-content"><img src="images/exemplo-estudio.jpg" alt="Equipamento de estúdio fotográfico móvel"></div>
             <div class="text-content">
                 <h2>A Excelência de um Estúdio, Onde Você Precisa</h2>
-                <div class="advantage-box"><h4>Para Indivíduos e Grupos</h4><p>Levamos uma estrutura de estúdio completa até sua escola ou local de preferência, garantindo qualidade profissional com total comodidade para todos.</p></div>
+                <div class="advantage-box">
+                    <h4>Para Indivíduos e Grupos</h4>
+                    <p>Levamos uma estrutura de estúdio completa até sua escola ou local de preferência, garantindo qualidade profissional com total comodidade para todos.</p>
+                </div>
             </div>
         </div>
     </div>
+    
     <div class="wrapper">
         <h2 class="section-title-major">Nossas Galerias</h2>
         <div class="multi-carousel-container">
@@ -108,6 +111,7 @@
             <div id="carousel3" class="carousel-container"><div class="carousel-track"><div class="carousel-slide"><img src="images/ballet-exemplo-5.jpg" alt="Foto 5"></div><div class="carousel-slide"><img src="images/ballet-exemplo-6.jpg" alt="Foto 6"></div></div><button class="carousel-btn prev-btn">&#10094;</button><button class="carousel-btn next-btn">&#10095;</button><div class="carousel-dots"></div></div>
         </div>
     </div>
+    
     <div class="wrapper" style="background-color: #1E1E1E;">
         <h2 class="section-title-major">O que Nossos Clientes Dizem</h2>
         <div class="testimonials-container">
@@ -148,12 +152,20 @@
                     <div class="output-section">
                         <label>Investimento Total:</label>
                         <div id="groupPriceResult">Digite um número</div>
-                        <div class="per-person-price-wrapper">
-                            <label>Valor por Dançarino(a):</label>
-                            <div id="perStudentPrice" class="per-person-price"></div>
-                            <p class="discount-info" id="groupDiscountInfo"></p>
-                        </div>
                     </div>
+                </div>
+                <div class="per-person-price-wrapper">
+                    <label>Valor por Dançarino(a):</label>
+                    <div id="perStudentPrice" class="per-person-price"></div>
+                    <p class="discount-info" id="groupDiscountInfo"></p>
+                </div>
+                <div class="benefits-section">
+                    <h4>O que está incluso no valor de grupo:</h4>
+                    <ul>
+                        <li>3 fotos digitais por dançarino(a), editadas profissionalmente.</li>
+                        <li>1 foto revelada (10x15) para cada participante.</li>
+                        <li>Duração do ensaio a combinar com o grupo.</li>
+                    </ul>
                 </div>
                  <div class="action-buttons">
                     <button id="generateGroupPdfBtn" class="action-btn" disabled>📄 Gerar PDF</button>
@@ -179,27 +191,18 @@
         function formatCurrency(v){ const n=parseFloat(v); return isNaN(n)?"0,00":n.toFixed(2).replace(".",",") }
 
         function initCarousel(id) {
-            const container = document.getElementById(id);
-            if (!container) return;
-            const track = container.querySelector('.carousel-track');
-            const slides = Array.from(track.children);
-            const nextButton = container.querySelector('.next-btn');
-            const prevButton = container.querySelector('.prev-btn');
+            const container = document.getElementById(id); if (!container) return;
+            const track = container.querySelector('.carousel-track'); const slides = Array.from(track.children);
+            const nextButton = container.querySelector('.next-btn'); const prevButton = container.querySelector('.prev-btn');
             const dotsNav = container.querySelector('.carousel-dots');
-            if (slides.length <= 1) {
-                if(nextButton) nextButton.style.display = 'none';
-                if(prevButton) prevButton.style.display = 'none';
-                return;
-            }
+            if (slides.length <= 1) { if(nextButton) nextButton.style.display = 'none'; if(prevButton) prevButton.style.display = 'none'; return; }
             slides.forEach((_, i) => { const dot = document.createElement('button'); dot.classList.add('dot'); dotsNav.appendChild(dot); dot.addEventListener('click', () => goToSlide(i)); });
-            const dots = Array.from(dotsNav.children);
-            let currentIndex = 0;
+            const dots = Array.from(dotsNav.children); let currentIndex = 0;
             const goToSlide = (index) => { track.style.transform = `translateX(-${100 * index}%)`; if(dots[currentIndex]) dots[currentIndex].classList.remove('active'); if(dots[index]) dots[index].classList.add('active'); currentIndex = index; };
             const nextSlide = () => goToSlide((currentIndex + 1) % slides.length);
             nextButton.addEventListener('click', nextSlide);
             prevButton.addEventListener('click', () => goToSlide((currentIndex - 1 + slides.length) % slides.length));
-            setInterval(nextSlide, 5000);
-            goToSlide(0);
+            setInterval(nextSlide, 5000); goToSlide(0);
         }
         initCarousel('carousel1'); initCarousel('carousel2'); initCarousel('carousel3');
 
@@ -211,8 +214,7 @@
         if (packageButtons.length > 0 && priceResult) {
             packageButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    packageButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+                    packageButtons.forEach(btn => btn.classList.remove('active')); button.classList.add('active');
                     individualProposalData = { name: button.getAttribute('data-name'), oldPrice: button.getAttribute('data-old-price'), newPrice: button.getAttribute('data-price'), details: button.getAttribute('data-details') };
                     let benefitsHTML = '<ul>' + individualProposalData.details.split('|').map(item => `<li><span class="emoji">✓</span> ${item.trim()}</li>`).join('') + '</ul>';
                     priceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(individualProposalData.oldPrice)}</span><span class="new-price-display">Por R$ ${formatCurrency(individualProposalData.newPrice)}</span><div id="priceDetails">${benefitsHTML}</div>`;
@@ -233,7 +235,7 @@
         const generateGroupPdfBtn = document.getElementById('generateGroupPdfBtn');
         const sendGroupWppBtn = document.getElementById('sendGroupWppBtn');
         let groupProposalData = {};
-        
+
         function getGroupPricePerStudent(num) {
             if (num < 8) return 0;
             if (num >= 8 && num <= 10) { return 550 / num; }
@@ -272,12 +274,12 @@
 
             const totalPrice = count * pricePerStudentNum;
             const originalTotalPrice = count * basePricePerStudent;
-            const oldPerStudentPrice = (count === 8) ? basePricePerStudent : getGroupPricePerStudent(count - 1);
+            const oldPerStudentPrice = (count <= 10 && count >= 8) ? basePricePerStudent : getGroupPricePerStudent(count - 1);
 
             groupProposalData = { count, total: totalPrice, originalTotal: originalTotalPrice, perStudent: pricePerStudentNum, oldPerStudent: oldPerStudentPrice };
             
             groupPriceResult.innerHTML = `<span class="old-price-display">De R$ ${formatCurrency(originalTotalPrice)}</span><span class="new-price-display">R$ ${formatCurrency(totalPrice)}</span>`;
-            perStudentPriceDisplay.innerHTML = `<span class="old-per-person">De R$ ${formatCurrency(oldPerStudentPrice)}</span> <span class="new-per-person">Por R$ ${formatCurrency(pricePerStudentNum)}</span>`;
+            perStudentPriceDisplay.innerHTML = `<span class="old-per-person">De R$ ${formatCurrency(groupProposalData.oldPerStudent)}</span> <span class="new-per-person">Por R$ ${formatCurrency(groupProposalData.perStudent)}</span>`;
             groupDiscountInfo.textContent = 'Quanto maior o grupo, maior o desconto!';
             groupDiscountInfo.style.opacity = 1;
             
